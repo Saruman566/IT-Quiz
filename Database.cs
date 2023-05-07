@@ -21,8 +21,10 @@ namespace Lern_Quiz
         public int answer_counter = 0;
         private string get_quest;        
         private string get_count;
-        private int next_counter = -1;
+        private int next_counter = 0;
         private int max_db;
+        private string db_name;
+        private int text_counter = 0;
 
         public static List<String> Quest_number = new List<string>();
         public static List<String> Quests = new List<string>();        
@@ -34,9 +36,13 @@ namespace Lern_Quiz
         
         
 
+
+       
+        // Datenbank lesen
         public void ReadDatabase(string database_name)
-        {            
-            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:C:\Development\C#\lern-Quiz\Lern-Quiz\Quizdatabase.db");
+        {
+            
+            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:Quizdatabase.db");
             new_db_connection.Open();
 
             get_quest = String.Format("SELECT * FROM {0} ", database_name);
@@ -44,7 +50,7 @@ namespace Lern_Quiz
             SQLiteCommand give_the_quest = new SQLiteCommand(get_quest, new_db_connection);
                 
             SQLiteDataReader rdr_quest = give_the_quest.ExecuteReader();
-                
+                           
             while (rdr_quest.Read())
             {
                 int number = rdr_quest.GetInt16(0);
@@ -63,16 +69,18 @@ namespace Lern_Quiz
                 Answer3.Add(answer3);
                 Answer4.Add(answer4);
                 RightAnswer.Add(right_answer);
-                
+
+                                
             }
-            new_db_connection.Close();
+            new_db_connection.Close();           
                         
         }
 
+        // Datenbank counter lesen
         public int Read_Count_Of_Db(string database_name)
         {   
                         
-            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:C:\Development\C#\lern-Quiz\Lern-Quiz\Quizdatabase.db");
+            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:Quizdatabase.db");
             new_db_connection.Open();
 
             
@@ -82,26 +90,44 @@ namespace Lern_Quiz
 
             new_db_connection.Close();
 
-            max_db = rdr_count;
+            db_name= database_name;
+            max_db = rdr_count - 1;
 
             return rdr_count;
         }
 
+        // Remove
+        public void remove_quests()
+        {
+            Quest_number.Clear();
+            Quests.Clear();
+            Answer1.Clear();
+            Answer2.Clear();
+            Answer3.Clear();
+            Answer4.Clear();
+            RightAnswer.Clear();
+        }
 
+        // Vor
         public Tuple<string, string, string, string, string, string, string> next_quest()
         {
-
-            Console.WriteLine("this is in next : {0}",next_counter);
-
-            if (next_counter + 1 != max_db)
+                        
+            if (text_counter != 0)
             {
-                next_counter += 1;
-            }
-            else
-            {
-
-            }
-
+                if (next_counter < max_db )
+                {
+                    next_counter += 1;
+                }
+                else if (next_counter > max_db)
+                {
+                    next_counter = max_db;
+                }
+                else
+                {
+                    
+                }
+            }                     
+                 
             string first_number = Quest_number[next_counter];
             string first_quest = Quests[next_counter];
             string first_answer = Answer1[next_counter];
@@ -109,24 +135,26 @@ namespace Lern_Quiz
             string third_answer = Answer3[next_counter];
             string four_answer = Answer4[next_counter];
             string right_answer = RightAnswer[next_counter];
-            
-
+       
             var all_answers = Tuple.Create<string, string, string, string, string, string, string>(first_number, first_quest, first_answer, second_answer, third_answer,
             four_answer, right_answer);
 
-           
-            return all_answers;
+            text_counter += 1;
 
+            return all_answers;   
         }
 
+        // Zurück
         public Tuple<string, string, string, string, string, string, string> last_quest()
         {
-
-            Console.WriteLine("this is in last : {0}", next_counter);
-                        
-            if (next_counter - 1 >= 0)
+            
+            if (next_counter > 0)
             {
-             next_counter -= 1;
+                next_counter -= 1;
+            }
+            else if (next_counter == 0 ^ next_counter < 0)
+            {
+                next_counter = 0;
             }
             else
             {
@@ -140,14 +168,85 @@ namespace Lern_Quiz
             string third_answer = Answer3[next_counter];
             string four_answer = Answer4[next_counter];
             string right_answer = RightAnswer[next_counter];
-
-
 
             var all_answers = Tuple.Create<string, string, string, string, string, string, string>(first_number, first_quest, first_answer, second_answer, third_answer,
             four_answer, right_answer);
 
             return all_answers;
         }             
-           
+        
+        // Umbenennung
+        public string give_db_name()
+        {
+            if (db_name == "it_sicherheit")
+            {
+                db_name = "IT Sicherheit";
+            }
+            else if (db_name == "it_systeme")
+            {
+                db_name = "IT Systeme";
+            }
+            else if (db_name == "programmieren")
+            {
+                db_name = "Programmieren";
+            }
+            else if (db_name == "datenbanken")
+            {
+                db_name = "Datenbanken";
+            }
+            else if (db_name == "cyberphysischesysteme")
+            {
+                db_name = "Cyberphysischesysteme";
+            }
+            else if (db_name == "ipv4")
+            {
+                db_name = "IPv4";
+            }
+            else if (db_name == "ipv6")
+            {
+                db_name = "IPv6";
+            }
+            else if (db_name == "firewall")
+            {
+                db_name = "Firewall";
+            }
+            else if (db_name == "tcpip")
+            {
+                db_name = "TCP/IP";
+            }
+            else if (db_name == "routing")
+            {
+                db_name = "Routing";
+            }
+            else if (db_name == "wiso")
+            {
+                db_name = "WISO";
+            }
+            else if (db_name == "arbeitsrecht")
+            {
+                db_name = "Arbeitsrecht";
+            }
+            else if (db_name == "kalkulationen")
+            {
+                db_name = "Kalkulationen";
+            }
+            else if (db_name == "marketing")
+            {
+                db_name = "Marketing";
+            }
+            else if (db_name == "organisationslehre")
+            {
+                db_name = "Organisationslehre";
+            }
+            else if (db_name == "projektmanagement")
+            {
+                db_name = "Projektmanagement";
+            }
+            else if (db_name == "rechtsformen")
+            {
+                db_name = "Rechtsformen";
+            }
+            return db_name;
+        }
     }
 }

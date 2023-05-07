@@ -39,11 +39,10 @@
             this.Questions = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.questcount = new System.Windows.Forms.Label();
+            this.them_label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.questt = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.label1 = new System.Windows.Forms.Label();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.iTSicherheitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iTSystemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.programmierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +62,8 @@
             this.organisationslehreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projektmanagemenbtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rechtsformenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.Questions.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,8 +86,9 @@
             // 
             // Last
             // 
-            this.Last.BackColor = System.Drawing.Color.Transparent;
+            this.Last.BackColor = System.Drawing.Color.SkyBlue;
             this.Last.Font = new System.Drawing.Font("Monotype Corsiva", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Last.ForeColor = System.Drawing.Color.Teal;
             this.Last.Location = new System.Drawing.Point(120, 340);
             this.Last.Name = "Last";
             this.Last.Size = new System.Drawing.Size(119, 63);
@@ -99,6 +101,7 @@
             // 
             this.answer1.BackColor = System.Drawing.Color.SkyBlue;
             this.answer1.Font = new System.Drawing.Font("Constantia", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.answer1.ForeColor = System.Drawing.Color.Teal;
             this.answer1.Location = new System.Drawing.Point(306, 441);
             this.answer1.Name = "answer1";
             this.answer1.Size = new System.Drawing.Size(693, 79);
@@ -110,6 +113,7 @@
             // 
             this.answer2.BackColor = System.Drawing.Color.SkyBlue;
             this.answer2.Font = new System.Drawing.Font("Constantia", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.answer2.ForeColor = System.Drawing.Color.Teal;
             this.answer2.Location = new System.Drawing.Point(306, 526);
             this.answer2.Name = "answer2";
             this.answer2.Size = new System.Drawing.Size(693, 71);
@@ -121,6 +125,7 @@
             // 
             this.answer3.BackColor = System.Drawing.Color.SkyBlue;
             this.answer3.Font = new System.Drawing.Font("Constantia", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.answer3.ForeColor = System.Drawing.Color.Teal;
             this.answer3.Location = new System.Drawing.Point(306, 603);
             this.answer3.Name = "answer3";
             this.answer3.Size = new System.Drawing.Size(693, 72);
@@ -132,6 +137,7 @@
             // 
             this.answer4.BackColor = System.Drawing.Color.SkyBlue;
             this.answer4.Font = new System.Drawing.Font("Constantia", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.answer4.ForeColor = System.Drawing.Color.Teal;
             this.answer4.Location = new System.Drawing.Point(306, 681);
             this.answer4.Name = "answer4";
             this.answer4.Size = new System.Drawing.Size(693, 72);
@@ -141,10 +147,10 @@
             // 
             // Next
             // 
-            this.Next.BackColor = System.Drawing.Color.Transparent;
+            this.Next.BackColor = System.Drawing.Color.SkyBlue;
             this.Next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Next.Font = new System.Drawing.Font("Monotype Corsiva", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Next.ForeColor = System.Drawing.Color.Black;
+            this.Next.ForeColor = System.Drawing.Color.Teal;
             this.Next.Location = new System.Drawing.Point(1053, 340);
             this.Next.Name = "Next";
             this.Next.Size = new System.Drawing.Size(134, 63);
@@ -179,6 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.questcount);
+            this.panel2.Controls.Add(this.them_label);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(687, 87);
@@ -189,12 +196,27 @@
             // 
             this.questcount.AutoSize = true;
             this.questcount.Font = new System.Drawing.Font("Lucida Calligraphy", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.questcount.Location = new System.Drawing.Point(254, 21);
+            this.questcount.ForeColor = System.Drawing.Color.Cyan;
+            this.questcount.Location = new System.Drawing.Point(488, 22);
             this.questcount.Name = "questcount";
             this.questcount.Size = new System.Drawing.Size(186, 45);
             this.questcount.TabIndex = 1;
             this.questcount.Text = "Welcome";
+            this.questcount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.questcount.Click += new System.EventHandler(this.questcount_Click);
+            // 
+            // them_label
+            // 
+            this.them_label.AutoSize = true;
+            this.them_label.Font = new System.Drawing.Font("Lucida Calligraphy", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.them_label.ForeColor = System.Drawing.Color.Cyan;
+            this.them_label.Location = new System.Drawing.Point(30, 22);
+            this.them_label.Name = "them_label";
+            this.them_label.Size = new System.Drawing.Size(186, 45);
+            this.them_label.TabIndex = 2;
+            this.them_label.Text = "Welcome";
+            this.them_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.them_label.Click += new System.EventHandler(this.them_label_Click);
             // 
             // panel1
             // 
@@ -209,6 +231,7 @@
             // 
             this.questt.BackColor = System.Drawing.Color.Transparent;
             this.questt.Font = new System.Drawing.Font("Lucida Handwriting", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.questt.ForeColor = System.Drawing.Color.Cyan;
             this.questt.Location = new System.Drawing.Point(11, 10);
             this.questt.Margin = new System.Windows.Forms.Padding(0);
             this.questt.Name = "questt";
@@ -239,27 +262,6 @@
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Imprint MT Shadow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(1179, 743);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 28);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "@Z.D.";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.Cyan;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(168, 25);
-            this.toolStripMenuItem3.Text = "Frage hinzufügen";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // iTSicherheitToolStripMenuItem
             // 
@@ -336,40 +338,45 @@
             this.iPv4ToolStripMenuItem.BackColor = System.Drawing.Color.MidnightBlue;
             this.iPv4ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.iPv4ToolStripMenuItem.Name = "iPv4ToolStripMenuItem";
-            this.iPv4ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.iPv4ToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.iPv4ToolStripMenuItem.Text = "IPv4";
+            this.iPv4ToolStripMenuItem.Click += new System.EventHandler(this.iPv4ToolStripMenuItem_Click);
             // 
             // iPv6ToolStripMenuItem
             // 
             this.iPv6ToolStripMenuItem.BackColor = System.Drawing.Color.MidnightBlue;
             this.iPv6ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.iPv6ToolStripMenuItem.Name = "iPv6ToolStripMenuItem";
-            this.iPv6ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.iPv6ToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.iPv6ToolStripMenuItem.Text = "IPv6";
+            this.iPv6ToolStripMenuItem.Click += new System.EventHandler(this.iPv6ToolStripMenuItem_Click);
             // 
             // firewallToolStripMenuItem
             // 
             this.firewallToolStripMenuItem.BackColor = System.Drawing.Color.MidnightBlue;
             this.firewallToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.firewallToolStripMenuItem.Name = "firewallToolStripMenuItem";
-            this.firewallToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.firewallToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.firewallToolStripMenuItem.Text = "Firewall";
+            this.firewallToolStripMenuItem.Click += new System.EventHandler(this.firewallToolStripMenuItem_Click);
             // 
             // tCPIPToolStripMenuItem
             // 
             this.tCPIPToolStripMenuItem.BackColor = System.Drawing.Color.MidnightBlue;
             this.tCPIPToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.tCPIPToolStripMenuItem.Name = "tCPIPToolStripMenuItem";
-            this.tCPIPToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.tCPIPToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.tCPIPToolStripMenuItem.Text = "TCP/IP";
+            this.tCPIPToolStripMenuItem.Click += new System.EventHandler(this.tCPIPToolStripMenuItem_Click);
             // 
             // routingToolStripMenuItem
             // 
             this.routingToolStripMenuItem.BackColor = System.Drawing.Color.MidnightBlue;
             this.routingToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.routingToolStripMenuItem.Name = "routingToolStripMenuItem";
-            this.routingToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.routingToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.routingToolStripMenuItem.Text = "Routing";
+            this.routingToolStripMenuItem.Click += new System.EventHandler(this.routingToolStripMenuItem_Click);
             // 
             // wISOToolStripMenuItem
             // 
@@ -394,6 +401,7 @@
             this.arbeitsrechtToolStripMenuItem.Name = "arbeitsrechtToolStripMenuItem";
             this.arbeitsrechtToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.arbeitsrechtToolStripMenuItem.Text = "Arbeitsrecht";
+            this.arbeitsrechtToolStripMenuItem.Click += new System.EventHandler(this.arbeitsrechtToolStripMenuItem_Click);
             // 
             // kalkulationenToolStripMenuItem
             // 
@@ -402,6 +410,7 @@
             this.kalkulationenToolStripMenuItem.Name = "kalkulationenToolStripMenuItem";
             this.kalkulationenToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.kalkulationenToolStripMenuItem.Text = "Kalkulationen";
+            this.kalkulationenToolStripMenuItem.Click += new System.EventHandler(this.kalkulationenToolStripMenuItem_Click);
             // 
             // marketingToolStripMenuItem
             // 
@@ -410,6 +419,7 @@
             this.marketingToolStripMenuItem.Name = "marketingToolStripMenuItem";
             this.marketingToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.marketingToolStripMenuItem.Text = "Marketing";
+            this.marketingToolStripMenuItem.Click += new System.EventHandler(this.marketingToolStripMenuItem_Click);
             // 
             // organisationslehreToolStripMenuItem
             // 
@@ -418,6 +428,7 @@
             this.organisationslehreToolStripMenuItem.Name = "organisationslehreToolStripMenuItem";
             this.organisationslehreToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.organisationslehreToolStripMenuItem.Text = "Organisationslehre";
+            this.organisationslehreToolStripMenuItem.Click += new System.EventHandler(this.organisationslehreToolStripMenuItem_Click);
             // 
             // projektmanagemenbtToolStripMenuItem
             // 
@@ -426,6 +437,7 @@
             this.projektmanagemenbtToolStripMenuItem.Name = "projektmanagemenbtToolStripMenuItem";
             this.projektmanagemenbtToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.projektmanagemenbtToolStripMenuItem.Text = "Projektmanagement";
+            this.projektmanagemenbtToolStripMenuItem.Click += new System.EventHandler(this.projektmanagemenbtToolStripMenuItem_Click);
             // 
             // rechtsformenToolStripMenuItem
             // 
@@ -435,6 +447,28 @@
             this.rechtsformenToolStripMenuItem.Name = "rechtsformenToolStripMenuItem";
             this.rechtsformenToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.rechtsformenToolStripMenuItem.Text = "Rechtsformen";
+            this.rechtsformenToolStripMenuItem.Click += new System.EventHandler(this.rechtsformenToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.Cyan;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(168, 25);
+            this.toolStripMenuItem3.Text = "Frage hinzufügen";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Imprint MT Shadow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(1179, 743);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 28);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "@Z.D.";
             // 
             // ITSicherheit
             // 
@@ -461,6 +495,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ITSicherheit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IT-Sicherheit-Quiz";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Questions.ResumeLayout(false);
@@ -509,6 +544,7 @@
         private System.Windows.Forms.ToolStripMenuItem organisationslehreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projektmanagemenbtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rechtsformenToolStripMenuItem;
+        private System.Windows.Forms.Label them_label;
     }
 }
 

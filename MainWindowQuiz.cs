@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITQuiz;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,21 +22,22 @@ using System.Windows.Forms;
 namespace Lern_Quiz
 {
     public partial class ITSicherheit : Form    {
-
-        Database QuizDatabase = new Database();
-        Frage_hinzufügen neue_frage = new Frage_hinzufügen();
+                
+        Database QuizDatabase = new Database();        
         public int quest_numb = 1;        
         private dynamic q_text;
         private string right_answer;
         private string quest_n;
         private int next_count = 0;
-                
+        //private string path_to_file;
 
 
-        public ITSicherheit() {
-
-            InitializeComponent();           
-                        
+        public ITSicherheit() 
+        {
+            Main_menu(); 
+            Loading_db();
+            InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -41,7 +45,7 @@ namespace Lern_Quiz
             
             
         }
-
+        // Background
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.SuspendLayout();
@@ -63,7 +67,8 @@ namespace Lern_Quiz
         {
 
         }      
-               
+         
+        // Antwort checks
         private void answer1_Click(object sender, EventArgs e)
         {
             check_answer(1);
@@ -89,14 +94,54 @@ namespace Lern_Quiz
             
         }
 
-        private void Last_Click(object sender, EventArgs e)
-        {
-            last_q();
+        // Vor & Zurück
+        private void Next_Click(object sender, EventArgs e)
+        {            
+           next_q();
         }
+        private void next_q()
+        {   
+            
+            this.SuspendLayout();
+            string db_name = QuizDatabase.give_db_name();
+           
+            if (next_count == 0)
+            {
+                DialogResult Notheme = MessageBox.Show("Sorry, bitte zuerst ein Thema wählen!", "Kein Thema gewählt!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Notheme == DialogResult.Yes)
+                {
 
+                }
+                
+            }
+            else
+            {
+                q_text = QuizDatabase.next_quest();                
+                quest_n = q_text.Item1;
+                questt.Text = q_text.Item2;
+                answer1.Text = q_text.Item3;
+                answer2.Text = q_text.Item4;
+                answer3.Text = q_text.Item5;
+                answer4.Text = q_text.Item6;
+                right_answer = q_text.Item7;
+
+                them_label.Text = string.Format("{0}", db_name);
+                questcount.Text = string.Format("Frage: {0}", (quest_n).ToString());
+
+                answer1.BackColor = Color.SkyBlue;
+                answer2.BackColor = Color.SkyBlue;
+                answer3.BackColor = Color.SkyBlue;
+                answer4.BackColor = Color.SkyBlue;
+
+                this.ResumeLayout(); 
+
+            }          
+   
+        }
         private void last_q()
         {
             this.SuspendLayout();
+            string db_name = QuizDatabase.give_db_name();
 
             if (next_count == 0)
             {
@@ -118,6 +163,7 @@ namespace Lern_Quiz
                 answer4.Text = q_text.Item6;
                 right_answer = q_text.Item7;
 
+                them_label.Text = string.Format("{0}", db_name);
                 questcount.Text = string.Format("Frage: {0}", (quest_n).ToString());
 
                 answer1.BackColor = Color.SkyBlue;
@@ -129,59 +175,17 @@ namespace Lern_Quiz
                 this.ResumeLayout();
             }
         }
+        private void Last_Click(object sender, EventArgs e)
+        {
+            last_q();
+        }
 
-
+        
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
-
-        private void next_q()
-        {   
-            
-            this.SuspendLayout();            
-
-            //Console.WriteLine(database_count);
-
-            if (next_count == 0)
-            {
-                DialogResult Notheme = MessageBox.Show("Sorry, bitte zuerst ein Thema wählen!", "Kein Thema gewählt!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (Notheme == DialogResult.Yes)
-                {
-
-                }
-                
-            }
-            else
-            {
-                q_text = QuizDatabase.next_quest();                
-                quest_n = q_text.Item1;
-                questt.Text = q_text.Item2;
-                answer1.Text = q_text.Item3;
-                answer2.Text = q_text.Item4;
-                answer3.Text = q_text.Item5;
-                answer4.Text = q_text.Item6;
-                right_answer = q_text.Item7;
-                
-                questcount.Text = string.Format("Frage: {0}", (quest_n).ToString());
-                
-                answer1.BackColor = Color.SkyBlue;
-                answer2.BackColor = Color.SkyBlue;
-                answer3.BackColor = Color.SkyBlue;
-                answer4.BackColor = Color.SkyBlue;
-
-                this.ResumeLayout(); 
-
-            }          
-   
-        }
-       
-
-        private void Next_Click(object sender, EventArgs e)
-        {
-           next_q();
-        }
-
+     
         private void questt_Click(object sender, EventArgs e)
         {
             
@@ -287,14 +291,19 @@ namespace Lern_Quiz
             
             if (okay is true)
             {
+                this.SuspendLayout();                
                 Application.Restart();
+                this.ResumeLayout();                
             }
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Frage_hinzufügen neue_frage = new Frage_hinzufügen();
+            
+            Frage_hinzufügen neue_frage = new Frage_hinzufügen(); 
+            this.SuspendLayout();
             neue_frage.Show();
+            this.ResumeLayout();            
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -302,17 +311,16 @@ namespace Lern_Quiz
             
         }
 
+        // IT-Sicherheit
+
         public void iTSicherheitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             DialogResult Questresult = MessageBox.Show("Thema zu IT-Sicherheit wechseln?","Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
-            {   
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("it_sicherheit");
-                QuizDatabase.Read_Count_Of_Db("it_sicherheit");
-                next_q();
-                
+            {
+                string database_name = "it_sicherheit";
+                Reload_db(database_name);
             }
             
             
@@ -323,16 +331,9 @@ namespace Lern_Quiz
             DialogResult Questresult = MessageBox.Show("Thema zu IT-Systeme wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
             {
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("it_systeme");
-                QuizDatabase.Read_Count_Of_Db("it_systeme");
-                next_q();
-                
-            }
-            
-            
-            
+                string database_name = "it_systeme";
+                Reload_db(database_name);
+            }         
         }
 
         public void programmierenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -340,14 +341,9 @@ namespace Lern_Quiz
             DialogResult Questresult = MessageBox.Show("Thema zu Programmieren wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
             {
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("programmieren");
-                QuizDatabase.Read_Count_Of_Db("programmieren");
-                next_q();
-                
-            }                     
-
+                string database_name = "programmieren";
+                Reload_db(database_name);
+            }                 
         }
 
         public void datenbankenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,14 +351,9 @@ namespace Lern_Quiz
             DialogResult Questresult = MessageBox.Show("Thema zu Datenbanken wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
             {
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("datenbanken");
-                QuizDatabase.Read_Count_Of_Db("datenbanken");
-                next_q();
-
+                string database_name = "datenbanken";
+                Reload_db(database_name);
             }
-            
         }
 
         public void linuxToolStripMenuItem_Click(object sender, EventArgs e)
@@ -370,14 +361,9 @@ namespace Lern_Quiz
             DialogResult Questresult = MessageBox.Show("Thema zu Linux wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
             {
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("linux");
-                QuizDatabase.Read_Count_Of_Db("linux");
-                next_q();
-
+                string database_name = "linux";
+                Reload_db(database_name);
             }
-           
         }
 
         private void cyberphysischesystemeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -385,38 +371,163 @@ namespace Lern_Quiz
             DialogResult Questresult = MessageBox.Show("Thema zu Cyberphysichesysteme wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Questresult == DialogResult.Yes)
             {
-                next_count++;
-                this.Update();
-                QuizDatabase.ReadDatabase("cyberphysischesysteme");
-                QuizDatabase.Read_Count_Of_Db("cyberphysischesysteme");
-                next_q();
-
+                string database_name = "cyberphysischesysteme";
+                Reload_db(database_name);
             }
+        }
+
+        // Netzwerke
+        public void netzwerkToolStripMenuItem_Click(object sender, EventArgs e)
+        {            
+            this.BackColor = Color.MidnightBlue;
+        }       
+
+        private void iPv4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu IPv4 wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "ipv4";            
+                Reload_db(database_name);
+            }
+        }
+
+        private void iPv6ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu IPv6 wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "ipv6";
+                Reload_db(database_name);
+            }
+        }
+
+        private void firewallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Firewall wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "firewall";
+                Reload_db(database_name);
+            }
+        }
+
+        private void tCPIPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu TCP/IP wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "tcpip";
+                Reload_db(database_name);
+            }
+        }
+
+        private void routingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Routing wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "routing";
+                Reload_db(database_name);
+            }
+        }
+
+        // WISO
+        public void wISOToolStripMenuItem_Click(object sender, EventArgs e)
+        {   
+            this.BackColor = Color.MidnightBlue;
+        }       
+
+        private void arbeitsrechtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Arbeitsrecht wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "arbeitsrecht";
+                Reload_db(database_name);
+            }
+        }
+
+        private void kalkulationenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Kalkulationen wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "kalkulationen";
+                Reload_db(database_name);
+            }
+        }
+
+        private void marketingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Marketing wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "marketing";
+                Reload_db(database_name);
+            }
+        }
+
+        private void organisationslehreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Organisationslehre wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "organisationslehre";
+                Reload_db(database_name);
+            }
+        }
+
+        private void projektmanagemenbtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Projektmanagement wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "projektmanagement";
+                Reload_db(database_name);
+            }
+        }
+
+        private void rechtsformenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Questresult = MessageBox.Show("Thema zu Rechtsformen wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Questresult == DialogResult.Yes)
+            {
+                string database_name = "rechtsformen";
+                Reload_db(database_name);
+            }
+        }
+        
+        private void Reload_db(string database_name)
+        {
+            next_count++;
+            QuizDatabase.remove_quests();
+            this.Update();
+            QuizDatabase.ReadDatabase(database_name);
+            QuizDatabase.Read_Count_Of_Db(database_name);
+            next_q();
+            last_q();
+        }
+
+        private void them_label_Click(object sender, EventArgs e)
+        {
+
+        }
+              
+        
+        private void Loading_db()
+        {
+            lo_db Lo_form = new lo_db();            
+            Lo_form.ShowDialog();
+
+        }
+
+        private void Main_menu()
+        {
+            FirstSide newmenu = new FirstSide();
+            newmenu.ShowDialog();
             
         }
 
-        public void netzwerkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /*DialogResult Questresult = MessageBox.Show("Thema zu Netwerk wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo);
-            if (Questresult == DialogResult.Yes)
-            {
-                QuizDatabase.ReadDatabase("netzwerk");
-                next_q(1);
-
-            }*/
-            this.BackColor = Color.MidnightBlue;
-        }
-
-        public void wISOToolStripMenuItem_Click(object sender, EventArgs e)
-        {   /*
-            DialogResult Questresult = MessageBox.Show("Thema zu WISO wechseln?", "Sind sie sicher?", MessageBoxButtons.YesNo);
-            if (Questresult == DialogResult.Yes)
-            {
-                QuizDatabase.ReadDatabase("wiso");
-                next_q(1);
-
-            }*/
-            this.BackColor = Color.MidnightBlue;
-        }
     }
 }
