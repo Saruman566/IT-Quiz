@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
+// using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Reflection;
 using System.Diagnostics;
 using System.Drawing.Text;
@@ -16,6 +17,7 @@ namespace Lern_Quiz
 {
     internal class Database
     {
+        
         public int Counter = 0;
         public int quest_counter = 0;
         public int answer_counter = 0;
@@ -40,16 +42,15 @@ namespace Lern_Quiz
        
         // Datenbank lesen
         public void ReadDatabase(string database_name)
-        {
-            
-            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:Quizdatabase.db");
+        {            
+            var new_db_connection = new SqliteConnection("Data Source=Quizdatabase.db");
             new_db_connection.Open();
 
             get_quest = String.Format("SELECT * FROM {0} ", database_name);
                
-            SQLiteCommand give_the_quest = new SQLiteCommand(get_quest, new_db_connection);
+            SqliteCommand give_the_quest = new SqliteCommand(get_quest, new_db_connection);
                 
-            SQLiteDataReader rdr_quest = give_the_quest.ExecuteReader();
+            SqliteDataReader rdr_quest = give_the_quest.ExecuteReader();
                            
             while (rdr_quest.Read())
             {
@@ -80,12 +81,12 @@ namespace Lern_Quiz
         public int Read_Count_Of_Db(string database_name)
         {   
                         
-            SQLiteConnection new_db_connection = new SQLiteConnection(@"URI=file:Quizdatabase.db");
+            SqliteConnection new_db_connection = new SqliteConnection("Data Source=Quizdatabase.db");
             new_db_connection.Open();
 
             
             get_count = String.Format("SELECT COUNT(Frage) FROM {0}", database_name);
-            SQLiteCommand give_the_count = new SQLiteCommand(get_count, new_db_connection);
+            SqliteCommand give_the_count = new SqliteCommand(get_count, new_db_connection);
             Int32 rdr_count = Convert.ToInt32(give_the_count.ExecuteScalar());
 
             new_db_connection.Close();

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IT_Quiz_Updater;
 
 namespace ITQuiz
 {
@@ -21,12 +20,12 @@ namespace ITQuiz
             InitializeComponent();
         }
 
-        private void back_Click(object sender, EventArgs e)
+       /* private void back_Click(object sender, EventArgs e)
         {
             quizdater new_up = new quizdater();
             new_up.Show();
             
-        }
+        }*/
 
         private void Quiz_Click(object sender, EventArgs e)
         {

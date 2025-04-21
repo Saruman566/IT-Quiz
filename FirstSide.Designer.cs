@@ -56,7 +56,7 @@
             this.updater.TabIndex = 5;
             this.updater.Text = "IT-Quiz Updater";
             this.updater.UseVisualStyleBackColor = false;
-            this.updater.Click += new System.EventHandler(this.back_Click);
+           //  this.updater.Click += new System.EventHandler(this.back_Click);
             // 
             // Quiz
             // 
@@ -92,7 +92,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label Menu;
+        private new System.Windows.Forms.Label Menu;
         private System.Windows.Forms.Button updater;
         private System.Windows.Forms.Button Quiz;
     }
