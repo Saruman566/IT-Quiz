@@ -1,6 +1,6 @@
 # IT-Quiz
 
-### A IT-Quiz in German to learning many Aspekts of IT.
+### IT-Quiz in German to learn many Aspekts of IT.
 
 ![IT-Quiz](https://user-images.githubusercontent.com/95621934/234674194-5d01a4fa-611a-4780-9e1e-4740ccec65ae.jpg)
 
